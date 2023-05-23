@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p ="http://www.springframework.org/schema/p"
+       xmlns:beans = "http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd ">
+
+    <!--
+    <context:annotation-config/>
+    <context:component-scan base-package="com.bit.test1"/>이경로에서부터 component를 찾겠다 -->
+
+    <bean id ="add" class="com.bit.exam.test1.CalcAdd">
+        <constructor-arg index="0" type="int" value="25"/>
+        <constructor-arg index="1" type="int" value="36"/>
+    </bean>
+
+   <bean id="mul" class="com.bit.exam.test1.CalcMul" p:x="25" p:y="36"/>
+
+
+</beans>

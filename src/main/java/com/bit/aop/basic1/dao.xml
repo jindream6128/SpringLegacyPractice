@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+    <bean id="afterAdvice" class="com.bit.aop.basic1.AfterAdvice"/>
+    <bean id="beforeAdvice" class="com.bit.aop.basic1.BeforeAdvice"/>
+    <bean id="oracleDao" class="com.bit.aop.basic1.OracleDao" scope="singleton"/>
+    <bean id="mysqlDao" class="com.bit.aop.basic1.MysqlDao" scope="singleton"/>
+    <bean id ="timeAdvice" class="com.bit.aop.basic1.LoggerAdvice" scope="singleton"/>
+
+    <aop:config>
+
+        <aop:aspect id="time" ref="timeAdvice">
+            <aop:around method="loggerProcess" pointcut="execution(public * com.bit.aop.basic1.Dao*.*(..))"/>
+        </aop:aspect>
+        <!--<aop:aspect id="before" ref="beforeAdvice">
+           pointcut -> where의 실질적인 주소가 나옴
+            <aop:before method="beforeMethod" pointcut="execution(public * com.bit.aop.basic1.Dao*.*(..))"/>
+        </aop:aspect>
+        <aop:aspect id="after" ref="afterAdvice">
+         pointcut -> where의 실질적인 주소가 나옴
+            <aop:after-throwing method="AfterMethod" pointcut="execution(public * com.bit.aop.basic1.Dao*.*(..))"/>
+        </aop:aspect>-->
+
+        <!--여기서 after-returning을 하면 -> 성공적으로 returng했을때만 AfterMethod가 불리어진다-->
+        <!--여기서 after-throwing을 하면 -> 예외처리가 나야만 후처리를 한다. -->
+        <!--여기서 그냥 after 를 하면 전부다 된다-->
+    </aop:config>
+
+
+</beans>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p = "http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--싱글톤은 1번만-> init-method 초기화해라 해당 메서드로, destory-method -> 파괴될 시점의 메소드 -->
+    <bean id = "person1" class="com.bit.di.basic1.Person" p:name="이도경" p:age="22" p:address="사하구" scope="singleton" init-method="initPerson" destroy-method="destroyPerson"/>
+
+    <bean id = "person2" class="com.bit.di.basic1.Person" scope="prototype" init-method="initPerson" destroy-method="destroyPerson">
+        <property name="name" value="김가영"/>
+        <property name="age" value="23"/>
+        <property name="address" value="부산시 수영구 민락동"/>
+    </bean>
+
+   <bean id="person3" class="com.bit.di.basic1.Person" scope="singleton" init-method="initPerson" destroy-method="destroyPerson">
+        <constructor-arg name="name" type="java.lang.String" value="석진성"/>
+        <constructor-arg name="age" type="int" value="25"/>
+    </bean>
+
+    <bean id="person4" class="com.bit.di.basic1.Person" scope="singleton">
+        <constructor-arg index="0" type="java.lang.String" value="김민준"/>
+        <constructor-arg index="1" type="int" value="26"/>
+        <constructor-arg index="2" type="java.lang.String" value="부산시"/>
+        <!--기본 타입은 int, float, double이렇게 넣기-->
+    </bean>
+
+    <bean id="pc1" class="com.bit.di.basic1.PersonCollection" scope="singleton">
+        <property name="list">
+            <list>
+                <ref bean="person1"></ref>
+                <ref bean="person1"></ref>
+                <ref bean="person1"></ref>
+                <ref bean="person1"></ref>
+                <ref bean="person1"></ref>
+                <ref bean="person2"></ref>
+                <ref bean="person3"></ref>
+                <ref bean="person4"></ref>
+                <ref bean="person1"></ref>
+            </list>
+        </property>
+
+        <property name="set"> <!--순서가 없고 중복이 없다 -->
+            <set>
+                <ref bean="person1"></ref>
+                <ref bean="person1"></ref>
+                <ref bean="person1"></ref>
+                <ref bean="person1"></ref>
+                <ref bean="person1"></ref>
+                <ref bean="person2"></ref>
+                <ref bean="person3"></ref>
+                <ref bean="person4"></ref>
+                <ref bean="person1"></ref>
+            </set>
+        </property>
+
+        <property name="properties">
+            <props>
+                <prop key ="servlet/com/login">Login</prop>
+                <prop key ="servlet/com/list">list</prop>
+                <prop key ="servlet/com/delete">delete</prop>
+                <prop key ="servlet/com/update">update</prop>
+            </props>
+        </property>
+
+        <property name="map">
+            <map>
+                <entry>
+                    <key>
+                        <value>1</value>
+                    </key>
+                    <ref bean="person1"></ref>
+                </entry>
+
+                <entry>
+                    <key>
+                        <value>2</value>
+                    </key>
+                    <ref bean="person2"></ref>
+                </entry>
+
+                <entry>
+                    <key>
+                        <value>3</value>
+                    </key>
+                    <ref bean="person3"></ref>
+                </entry>
+
+                <entry>
+                    <key>
+                        <value>4</value>
+                    </key>
+                    <ref bean="person4"></ref>
+                </entry>
+            </map>
+        </property>
+
+    </bean>
+</beans>

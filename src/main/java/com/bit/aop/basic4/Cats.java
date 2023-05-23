@@ -1,0 +1,41 @@
+package com.bit.aop.basic4;
+
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Cats {
+    private String name;
+    private int age;
+    private String color;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void getCatsInfo() { // 핵심코드
+        //여기서는 정상종료
+        System.out.println(getAge()+getColor()+getName());
+    }
+
+}

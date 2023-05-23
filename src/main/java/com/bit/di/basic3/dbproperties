@@ -1,0 +1,4 @@
+bit.com.serverName = MyBatisServer
+bit.com.serverPort = 5000
+bit.com.serverUrl = 127.0.0.1.8080:MyDB
+bit.com.connectionCount = 70000

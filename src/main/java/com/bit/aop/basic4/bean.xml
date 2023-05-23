@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+    <aop:aspectj-autoproxy/>
+    <context:annotation-config/>
+    <context:component-scan base-package="com.bit.aop.basic4"/>
+
+    <bean id="myCat" class="com.bit.aop.basic4.Cats">
+        <property name="name" value="고양이"/>
+        <property name="age" value="5"/>
+        <property name="color" value="white"/>
+    </bean>
+
+    <bean id="logAop" class="com.bit.aop.basic4.LogAop"/>
+
+    <aop:config>
+        <aop:aspect id="logger" ref="logAop">
+            <aop:around method="loggerAop" pointcut="execution(public  * com.bit.aop.basic4.LogAop*.*(..))"/>
+        </aop:aspect>
+    </aop:config>
+
+
+</beans>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+    <bean id="commandAttack" class="com.bit.aop.basic2.CommandAttack" scope="singleton"/>
+    <bean id="commandMove" class="com.bit.aop.basic2.CommandMove" scope="singleton"/>
+    <bean id="medicAdvice" class="com.bit.aop.basic2.Medic"/>
+    <bean id="targetmarine" class="com.bit.aop.basic2.Marine">
+        <property name="command" ref="commandAttack"></property>
+    </bean>
+    <!--위에는 실제 마린 객체 - 실제 마린이 오렴될수도 있으니까 프록시를 하나 만든다 -> 프록시패턴 -> 프록시팩토리빈-->
+    <bean id="marine" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="targetMarine"></property>
+        <property name="intercepterNames">
+            <list>
+                <value>medicAdvice</value>
+            </list>
+        </property>
+    </bean>
+
+
+</beans>
